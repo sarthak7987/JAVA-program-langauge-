@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class HarmonicSeries {
+    public static void main(String[] args) {
+        // Create a Scanner object for user input
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user for the number of terms in the Harmonic series
+        System.out.print("Enter the number of terms: ");
+        int n = scanner.nextInt();
+
+        // Calculate and print the Harmonic series
+        double harmonicSum = 0.0;
+        System.out.print("Harmonic series: ");
+        for (int i = 1; i <= n; i++) {
+            // Print the current term of the series
+            System.out.print("1/" + i + " ");
+            // Add the current term to the harmonic sum
+            harmonicSum += 1.0 / i;
+        }
+
+        // Print the sum of the Harmonic series
+        System.out.println("\nSum of Harmonic series up to " + n + " terms: " + harmonicSum);
+
+        // Close the scanner
+        scanner.close();
+    }
+}
