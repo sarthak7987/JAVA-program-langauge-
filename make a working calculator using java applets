@@ -1,0 +1,107 @@
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Calculator extends Applet implements ActionListener {
+    // Declare variables for text fields, buttons, and operator
+    TextField display;
+    Button[] numberButtons = new Button[10];
+    Button add, sub, mul, div, equals, clear;
+    String operator = "";
+    double num1, num2, result;
+
+    public void init() {
+        // Set the layout of the applet
+        setLayout(new BorderLayout());
+
+        // Create the display text field
+        display = new TextField();
+        display.setEditable(false);
+        add(display, BorderLayout.NORTH);
+
+        // Panel to hold the buttons
+        Panel panel = new Panel();
+        panel.setLayout(new GridLayout(4, 4));
+
+        // Initialize number buttons and add them to the panel
+        for (int i = 0; i < 10; i++) {
+            numberButtons[i] = new Button(String.valueOf(i));
+            numberButtons[i].addActionListener(this);
+            panel.add(numberButtons[i]);
+        }
+
+        // Initialize operator buttons
+        add = new Button("+");
+        sub = new Button("-");
+        mul = new Button("*");
+        div = new Button("/");
+        equals = new Button("=");
+        clear = new Button("C");
+
+        // Add operator buttons to the panel
+        panel.add(add);
+        panel.add(sub);
+        panel.add(mul);
+        panel.add(div);
+        panel.add(equals);
+        panel.add(clear);
+
+        // Add action listeners to operator buttons
+        add.addActionListener(this);
+        sub.addActionListener(this);
+        mul.addActionListener(this);
+        div.addActionListener(this);
+        equals.addActionListener(this);
+        clear.addActionListener(this);
+
+        // Add the panel to the applet
+        add(panel, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+
+        if (command.charAt(0) == 'C') {
+            // Clear the display
+            display.setText("");
+            num1 = num2 = result = 0;
+            operator = "";
+        } else if (command.charAt(0) == '=') {
+            // Perform the calculation when "=" is pressed
+            num2 = Double.parseDouble(display.getText());
+            switch (operator) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        display.setText("Error");
+                        return;
+                    }
+                    break;
+            }
+            display.setText(String.valueOf(result));
+            num1 = result;  // Store the result for further calculation
+        } else if (command.charAt(0) == '+' || command.charAt(0) == '-' || command.charAt(0) == '*' || command.charAt(0) == '/') {
+            // Set the operator
+            if (!display.getText().equals("")) {
+                num1 = Double.parseDouble(display.getText());
+                operator = command;
+                display.setText("");
+            }
+        } else {
+            // Append the number to the display
+            display.setText(display.getText() + command);
+        }
+    }
+}
