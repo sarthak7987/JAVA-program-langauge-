@@ -1,0 +1,13 @@
+import java.util.Random;
+
+public class RandomNumbers {
+    public static void main(String[] args) {
+        Random random = new Random();
+
+        // Generating 8 random numbers between -200 and 50
+        for (int i = 0; i < 8; i++) {
+            int randomNumber = random.nextInt(251) - 200; // random number between -200 and 50
+            System.out.println(randomNumber);
+        }
+    }
+}
