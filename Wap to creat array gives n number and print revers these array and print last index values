@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class ReverseArray {
+    public static void main(String[] args) {
+        // Create a Scanner object for user input
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt user for the number of elements in the array
+        System.out.print("Enter the number of elements: ");
+        int n = scanner.nextInt();
+
+        // Create an array to store the elements
+        int[] array = new int[n];
+
+        // Take input for the array
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        // Print the array in reverse order
+        System.out.println("Array in reverse order:");
+        for (int i = n - 1; i >= 0; i--) {
+            System.out.print(array[i] + " ");
+        }
+
+        // Print the last index value
+        System.out.println("\nLast index value: " + array[n - 1]);
+
+        // Close the scanner
+        scanner.close();
+    }
+}
